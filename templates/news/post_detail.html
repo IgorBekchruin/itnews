@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Главная{% endblock title %}
+
+{% block main %}
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!-- Post content -->
+            <div class="col-md-8">
+                <div class="section-row sticky-container">
+                    <div class="main-post">
+                        <h3>{{post.title}}</h3>
+                        <figure class="figure-img">
+                            <img class="img-responsive" src="{{post.image.url}}" alt="">
+                        </figure>
+                        <p>{{post.text}} </p>
+                </div>
+            </div>
+            <!-- /Post content -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+{% endblock main %}

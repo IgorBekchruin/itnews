@@ -520,7 +520,8 @@ RESPONSIVE
      opacity: 0.9;
 }
  .post .post-img > img {
-     width: 100%;
+     width: 350px;
+     height: 270px;
 }
  .post .post-meta {
      margin-top: 15px;

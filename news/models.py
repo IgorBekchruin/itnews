@@ -12,7 +12,7 @@ class Post(models.Model):
     category = TreeForeignKey('Category', on_delete=models.PROTECT, related_name='posts', verbose_name='Категория')
 
     def get_absolute_url(self):
-        return reverse('post', kwargs={'post_slug': self.slug})
+        return reverse('post_detail', kwargs={'slug': self.slug})
 
     class Meta:
         verbose_name = 'Пост'
@@ -34,7 +34,7 @@ class Category(MPTTModel):
         verbose_name_plural = 'Категории'
 
     def get_absolute_url(self):
-        return reverse('category', kwargs={'category_slug': self.slug})
+        return reverse('postbycategory', kwargs={'slug': self.slug})
 
     def __str__(self):
         return self.title

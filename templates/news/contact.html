@@ -72,6 +72,13 @@
 				<div id="nav-aside">
 					<!-- nav -->
 					<div class="section-row">
+						{% if user.is_authenticated %}
+						<p> User: {{ user }}</p>
+						<a href="{% url 'logout' %}">Выход</a>
+					{% else %}
+						<a href="{% url 'login' %}">Войти</a> | 
+						<a href="{% url 'register' %}">Регистрация</a>
+					{% endif %}
 						<ul class="nav-aside-menu">
 							<li><a href="index.html">Home</a></li>
 							<li><a href="about.html">About Us</a></li>

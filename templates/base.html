@@ -25,12 +25,15 @@
 	<body>
 
 		<!-- Header -->
-    {% include 'header.html' %}
+    	{% include 'header.html' %}
+	
+		{% block bar %}
+		{% endblock bar %}
 		<!-- /Header -->
 
-    {% block main %}
-    
-    {% endblock main %}
+    	{% block main %}    
+    	{% endblock main %}
+		
 		<!-- Footer -->
 		{% include 'footer.html' %}
 		<!-- /Footer -->

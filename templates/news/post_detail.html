@@ -1,6 +1,24 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} 
+{% load crispy_forms_tags %}
 
-{% block title %}Главная{% endblock title %}
+{% block title %}{{post.title}}{% endblock title %} 
+
+{% block bar %}
+<div id="post-header" class="page-header">
+    <div class="background-img" style="background-image: url('./img/post-page.jpg');"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10">
+                <div class="post-meta">
+                    <a class="post-category cat-2" href="category.html">JavaScript</a>
+                    <span class="post-date">March 27, 2018</span>
+                </div>
+                <h1>Ask HN: Does Anybody Still Use JQuery?</h1>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock bar %}
 
 {% block main %}
 <div class="section">
@@ -14,15 +32,127 @@
                     <div class="main-post">
                         <h3>{{post.title}}</h3>
                         <figure class="figure-img">
-                            <img class="img-responsive" src="{{post.image.url}}" alt="">
+                            <img
+                                class="img-responsive"
+                                src="{{post.image.url}}"
+                                alt=""
+                            />
                         </figure>
-                        <p>{{post.text}} </p>
+                        <p>{{post.text}}</p>
+                    </div>
+
+                    <!-- author -->
+
+                    <!-- /author -->
+
+                    <!-- comments -->
+                    <div class="section-row">
+                        <div class="section-title">
+                            <h2>Комментарии:</h2>
+                        </div>
+
+                        <div class="post-comments">
+                            <!-- comment -->
+                            {% for c in comments %}
+                            <div class="media">
+                                <div class="media-left">
+                                    <img class="media-object" src="./img/avatar.png" alt=""/>
+                                </div>
+                                <div class="media-body">
+                                    <div class="media-heading">
+                                        <h4>{{ c.name }}</h4>
+                                        <span class="time">March 27, 2018 at 8:00 am</span>
+                                        <a href="#" class="reply">Reply</a>
+                                    </div>
+                                    <p>{{ c.text }}</p>
+
+                                    <!-- Вложеный комментарий -->
+                                    {% comment %} <div class="media">
+                                        <div class="media-left">
+                                            <img class="media-object" src="./img/avatar.png" alt=""/>
+                                        </div>
+                                        <div class="media-body">
+                                            <div class="media-heading">
+                                                <h4>John Doe</h4>
+                                                <span class="time">March 27, 2018 at 8:00 am</span>
+                                                <a href="#" class="reply">Reply</a>
+                                            </div>
+                                            <p>
+                                                Lorem ipsum dolor sit amet,
+                                                consectetur adipisicing elit,
+                                                sed do eiusmod tempor incididunt
+                                                ut labore et dolore magna
+                                                aliqua. Ut enim ad minim veniam,
+                                                quis nostrud exercitation
+                                                ullamco laboris nisi ut aliquip
+                                                ex ea commodo consequat.
+                                            </p>
+                                        </div>
+                                    </div> {% endcomment %}
+                                    <!-- /comment -->
+                                </div>
+                            </div>
+                            {% endfor %}
+                            <!-- /comment -->
+                        </div>
+                    </div>
+                    <!-- /comments -->
+
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="next" value="{{ next }}">
+                        
+                        {{ form|crispy }}
+                        
+                        <button type="submit" class="btn btn-primary">Добавить комментарий</button>
+                    </form>
+
+                    
+                    <!-- reply -->
+                    <!-- <div class="section-row">
+                        <div class="section-title">
+                            <h2>Leave a reply</h2>
+                            <p>
+                                your email address will not be published.
+                                required fields are marked *
+                            </p>
+                        </div>
+                        <form class="post-reply">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <span>Name *</span>
+                                        <input class="input" type="text" name="name"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <span>Email *</span>
+                                        <input class="input" type="email" name="email"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <span>Website</span>
+                                        <input class="input" type="text" name="website"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <textarea class="input" name="message" placeholder="Message"></textarea>
+                                    </div>
+                                    <button class="primary-button">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div> -->
+                    <!-- /reply -->
                 </div>
+                <!-- /Post content -->
             </div>
-            <!-- /Post content -->
+            <!-- /row -->
         </div>
-        <!-- /row -->
+        <!-- /container -->
     </div>
-    <!-- /container -->
 </div>
 {% endblock main %}

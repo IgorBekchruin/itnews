@@ -42,13 +42,13 @@ class Category(MPTTModel):
 
 class Comment(models.Model):
     """Комментарии"""
-    email = models.EmailField()
+    email = models.EmailField(verbose_name='email')
     name = models.CharField("Имя", max_length=100)
     text = models.TextField("Сообщение", max_length=5000)
     # parent = models.ForeignKey(
     #     'self', verbose_name="Родитель", on_delete=models.SET_NULL, blank=True, null=True, related_name="children"
     # )
-    post = models.ForeignKey(Post, verbose_name="Комментарий", on_delete=models.PROTECT, related_name="comment")
+    post = models.ForeignKey(Post, verbose_name="Комментарий", on_delete=models.PROTECT, null=True,  related_name="comment")
 
     def __str__(self):
         return self.name

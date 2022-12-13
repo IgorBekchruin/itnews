@@ -1,3 +1,5 @@
+{% load news_tags %}
+{% get_category as categories %}
 <!-- Footer -->
 <footer id="footer">
     <!-- container -->
@@ -36,10 +38,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script>
                         <div class="footer-widget">
                             <h3 class="footer-title">Категории</h3>
                             <ul class="footer-links">
-                                <li><a href="category.html">Web Design</a></li>
-                                <li><a href="category.html">JavaScript</a></li>
-                                <li><a href="category.html">Css</a></li>
-                                <li><a href="category.html">Jquery</a></li>
+                                {% for c in categories %}
+                                <li><a href="{{ c.get_absolute_url }}">{{c.title}}</a></li>
+                                {% endfor %}
                             </ul>
                         </div>
                     </div>

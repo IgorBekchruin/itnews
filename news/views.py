@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic.base import View
 from .models import Post, Category, Comment
 from django.views.generic import DetailView, ListView, FormView
@@ -8,7 +8,7 @@ from django.urls import reverse, reverse_lazy
 
 class HomeView(View):
     def get(self, request, *args, **kwargs):
-        post = Post.objects.order_by("-created_at")[0:5]
+        post = Post.objects.order_by("-created_at")[0:6]
         category = Category.objects.all()
         return render(request, 'home.html', {'post': post, 'category': category,})
 
@@ -48,10 +48,17 @@ class PostDetailView(FormView, DetailView):
 
 
 class PostByCategory(ListView):
-    model = Post
+    # model = Post
     context_object_name = 'post'
     template_name = 'news/postbycategory.html'
     paginate_by = 10
 
     def get_queryset(self):
-        return Post.objects.select_related('category')
+        # получftv категорию
+        category = get_object_or_404(Category, slug__iexact=self.kwargs.get('slug'))
+        # вывести новости из категории
+        queryset = category.posts.all().order_by('-created_at')
+        return queryset
+
+
+        

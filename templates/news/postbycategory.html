@@ -8,7 +8,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-10">
-                <h1>{{ post.posts.title }}</h1>
+                <h1>Категория</h1>
             </div>
         </div>
     </div>
@@ -29,17 +29,16 @@
                     {% for p in post %}
                     <div class="col-md-12">
                         <div class="post post-row">
-                            <a class="post-img" href="blog-post.html"><img src="{{ p.image.url }}" alt=""/></a>
+                            <a class="post-img" href="{{ p.get_absolute_url }}"><img src="{{ p.image.url }}" alt=""/></a>
                             <div class="post-body">
                                 <div class="post-meta">
-                                    <a class="post-category cat-2" href="#">{{ p.title}}</a>
-                                    <span class="post-date">{{ p.created_at }}</span>
+                                    <a class="post-category cat-2" href="{{ p.category.get_absolute_url}}">{{ p.category.title}}</a>
+                                    <span class="post-date">{{ p.created_at|date:"SHORT_DATE_FORMAT" }}</span>
                                 </div>
                                 <h3 class="post-title">
-                                    <a href="blog-post.html">{{ p.category.title }}</a
-                                    >
+                                    <a href="{{ p.get_absolute_url }}">{{ p.title}}</a>
                                 </h3>
-                                <p>{{ p.text|truncatewords_html:20}}</p>
+                                <p>{{ p.text|truncatewords_html:40}}</p>
                             </div>
                         </div>
                     </div>
@@ -60,28 +59,11 @@
                 <!-- catagories -->
                 <div class="aside-widget">
                     <div class="section-title">
-                        <h2>Catagories</h2>
+                        <h2>Категории:</h2>
                     </div>
                     <div class="category-widget">
                         <ul>
-                            <li>
-                                <a href="#" class="cat-1"
-                                    >Web Design<span>340</span></a
-                                >
-                            </li>
-                            <li>
-                                <a href="#" class="cat-2"
-                                    >JavaScript<span>74</span></a
-                                >
-                            </li>
-                            <li>
-                                <a href="#" class="cat-4"
-                                    >JQuery<span>41</span></a
-                                >
-                            </li>
-                            <li>
-                                <a href="#" class="cat-3">CSS<span>35</span></a>
-                            </li>
+                            {% include 'category.html' %}
                         </ul>
                     </div>
                 </div>
@@ -89,6 +71,9 @@
 
                 <!-- tags -->
                 <div class="aside-widget">
+                    <div class="section-title">
+                        <h2>Тэги:</h2>
+                    </div>
                     <div class="tags-widget">
                         <ul>
                             <li><a href="#">Chrome</a></li>
@@ -108,7 +93,7 @@
                 <!-- archive -->
                 <div class="aside-widget">
                     <div class="section-title">
-                        <h2>Archive</h2>
+                        <h2>Архив:</h2>
                     </div>
                     <div class="archive-widget">
                         <ul>

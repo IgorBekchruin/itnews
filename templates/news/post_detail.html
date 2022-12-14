@@ -4,20 +4,22 @@
 {% block title %}{{post.title}}{% endblock title %} 
 
 {% block bar %}
-<div id="post-header" class="page-header">
-    <div class="background-img" style="background-image: url('./img/post-page.jpg');"></div>
+<!-- Page Header -->
+<div class="page-header">
     <div class="container">
         <div class="row">
             <div class="col-md-10">
+                <h1>{{post.title}}</h1>
                 <div class="post-meta">
-                    <a class="post-category cat-2" href="category.html">JavaScript</a>
-                    <span class="post-date">March 27, 2018</span>
+                    <a class="post-category cat-2" href="category.html">{{post.category.title}}</a>
+                    <span class="post-date">{{post.created_at|date:"SHORT_DATE_FORMAT"}}</span>
                 </div>
-                <h1>Ask HN: Does Anybody Still Use JQuery?</h1>
             </div>
         </div>
     </div>
 </div>
+<!-- /Page Header -->
+
 {% endblock bar %}
 
 {% block main %}
@@ -32,25 +34,16 @@
                     <div class="main-post">
                         <h3>{{post.title}}</h3>
                         <figure class="figure-img">
-                            <img
-                                class="img-responsive"
-                                src="{{post.image.url}}"
-                                alt=""
-                            />
+                            <img class="img-responsive" src="{{post.image.url}}" alt=""/>
                         </figure>
                         <p>{{post.text}}</p>
                     </div>
-
-                    <!-- author -->
-
-                    <!-- /author -->
 
                     <!-- comments -->
                     <div class="section-row">
                         <div class="section-title">
                             <h2>Комментарии:</h2>
                         </div>
-
                         <div class="post-comments">
                             <!-- comment -->
                             {% for c in comments %}
@@ -101,12 +94,9 @@
                     <form action="" method="post">
                         {% csrf_token %}
                         <input type="hidden" name="next" value="{{ next }}">
-                        
                         {{ form|crispy }}
-                        
                         <button type="submit" class="btn btn-primary">Добавить комментарий</button>
                     </form>
-
                     
                     <!-- reply -->
                     <!-- <div class="section-row">
@@ -150,9 +140,84 @@
                 </div>
                 <!-- /Post content -->
             </div>
-            <!-- /row -->
+            <!-- aside -->
+			<div class="col-md-4">
+				<!-- post widget -->
+				<div class="aside-widget">
+					<div class="section-title">
+						<h2>Популярные статьи</h2>
+					</div>
+
+					<div class="post post-widget">
+						<a class="post-img" href="blog-post.html"><img src="./img/widget-1.jpg" alt=""></a>
+						<div class="post-body">
+							<h3 class="post-title"><a href="blog-post.html">Tell-A-Tool: Guide To Web Design And Development Tools</a></h3>
+						</div>
+					</div>
+					<div class="post post-widget">
+						<a class="post-img" href="blog-post.html"><img src="./img/widget-2.jpg" alt=""></a>
+						<div class="post-body">
+								<h3 class="post-title"><a href="blog-post.html">Pagedraw UI Builder Turns Your Website Design Mockup Into Code Automatically</a></h3>
+						</div>
+					</div>
+				</div>
+				<!-- /post widget -->
+						
+				<!-- catagories -->
+                <div class="aside-widget">
+                    <div class="section-title">
+                        <h2>Категории:</h2>
+                    </div>
+                    <div class="category-widget">
+                        <ul>
+                            {% for cat in category %}
+                            <li>
+                                <a href="{{ cat.get_absolute_url }}" class="cat-1">{{cat.title}}<span>340</span></a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <!-- /catagories -->
+
+						
+				<!-- tags -->
+				<div class="aside-widget">
+							<div class="tags-widget">
+								<ul>
+									<li><a href="#">Chrome</a></li>
+									<li><a href="#">CSS</a></li>
+									<li><a href="#">Tutorial</a></li>
+									<li><a href="#">Backend</a></li>
+									<li><a href="#">JQuery</a></li>
+									<li><a href="#">Design</a></li>
+									<li><a href="#">Development</a></li>
+									<li><a href="#">JavaScript</a></li>
+									<li><a href="#">Website</a></li>
+								</ul>
+							</div>
+				</div>
+				<!-- /tags -->
+						
+				<!-- archive -->
+				<div class="aside-widget">
+							<div class="section-title">
+								<h2>Архив</h2>
+							</div>
+							<div class="archive-widget">
+								<ul>
+									<li><a href="#">January 2018</a></li>
+									<li><a href="#">Febuary 2018</a></li>
+									<li><a href="#">March 2018</a></li>
+								</ul>
+							</div>
+				</div>
+				<!-- /archive -->
+			</div>
+			<!-- /aside -->
         </div>
-        <!-- /container -->
+        <!-- /row -->
     </div>
+    <!-- /container -->
 </div>
 {% endblock main %}

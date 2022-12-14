@@ -476,7 +476,7 @@ RESPONSIVE
      margin: 15px 0px;
 }
  .page-header .post-meta .post-date {
-     color: #eceef2;
+     color: #1c222e;
 }
  .page-header .page-header-breadcrumb {
      margin: 15px 0px;
@@ -520,8 +520,8 @@ RESPONSIVE
      opacity: 0.9;
 }
  .post .post-img > img {
-     width: 350px;
-     height: 270px;
+     width: 300px;
+     height: 250px;
 }
  .post .post-meta {
      margin-top: 15px;
